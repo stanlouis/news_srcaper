@@ -1,0 +1,28 @@
+{
+  "name": "news_srcaper",
+  "version": "1.0.0",
+  "description": "A web app that lets users view and leave comments on the latest news",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stanlouis/news_srcaper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stanlouis/news_srcaper/issues"
+  },
+  "homepage": "https://github.com/stanlouis/news_srcaper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.2.3",
+    "morgan": "^1.9.0"
+  }
+}
