@@ -154,13 +154,10 @@ app.get("/api/articles/:id", function(req, res) {
 
 app.post("/api/notes/", function(req, res) {
   // Create a new note and pass the req.body to the entry
+  console.log("note", req.body)
   db.Note.create(req.body)
     .then(function(dbNote) {
-      return db.Article.findOneAndUpdate(
-        { _id: req.params.id },
-        { note: dbNote._id },
-        { new: true }
-      );
+      return db.Article.findOneAndUpdate({ _id: req.body._headlineId }, { note: dbNote._id }, { new: true });
     })
     .then(function(dbArticle) {
       res.json(dbArticle);

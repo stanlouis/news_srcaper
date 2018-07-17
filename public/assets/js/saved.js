@@ -89,6 +89,7 @@ $(document).ready(function() {
     // This function handles rendering note list items to our notes modal
     // Setting up an array of notes to render after finished
     // Also setting up a currentNote variable to temporarily store each note
+    console.log("renderNotesList", data.notes.note.noteText)
     var notesToRender = [];
     var currentNote;
     if (!data.notes.length) {
@@ -160,7 +161,7 @@ $(document).ready(function() {
         _id: currentArticle,
         notes: data || []
       };
-       console.log("note data", noteData.note)
+       console.log("note data", noteData)
       // Adding some information about the article and article notes to the save button for easy access
       // When trying to add a new note
       $(".btn.save").data("article", noteData);
