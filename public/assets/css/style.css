@@ -1,5 +1,12 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
+    margin-bottom: 80px;
+    background-image: url("../img/paper.png");
 }
 .custom-toggler.navbar-toggler {
     border-color: rgba(255, 255, 203, 0.7);
@@ -18,6 +25,97 @@ body {
     letter-spacing: .3rem;
     font-family: 'Julius Sans One', sans-serif;
 }
+
+.jumbotron {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    padding: 0;
+    font-family: "Cormorant SC";
+    box-shadow: 10px 5px 20px 2px lightslategrey;
+    margin-top: 90px;
+}
+
+.jumbotron .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: auto;
+    background: linear-gradient(#333, black);
+    opacity: 0.7;
+}
+
+.jumbotron .background-image {
+    height: 100%;
+    background-image: url("../img/newspaper.jpg");
+    background-size: cover;
+}
+
+.jumbotron .caption {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+}
+
+.jumbotron .caption h1,
+.jumbotron .caption p {
+    color: white;
+}
+
+.jumbotron h1 {
+    font-size: 80px;
+    font-weight: 800;
+}
+
+.jumbotron p {
+    font-size: 30px;
+}
+
+.article-container {
+    padding-bottom: 25px;
+}
+
+.card {
+    border-radius: 0;
+    box-shadow: 3px 3px 20px lightslategrey;
+    margin: 20px 0;
+}
+
+.card .card-header {
+    background-color: #2196f3;
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.card .card-header h3 {
+    color: white;
+}
+
+.card .card-header .btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.card .card-header .btn.delete {
+    right: 160px;
+}
+
+.card .card-body {
+    font-size: 16px;
+}
+
+.card .card-header .article-link {
+    color: white;
+    display: inline-block;
+    width: 80%;
+}
+
+
 footer {
     position: absolute;
     bottom: 0;
