@@ -195,8 +195,11 @@ $(document).ready(function() {
     // This function handles the deletion of notes
     // First we grab the id of the note we want to delete
     // We stored this data on the delete button when we created it
-    var noteToDelete = $(this).data("_id");
-    // Perform an DELETE request to "/api/notes/" with the id of the note we're deleting as a parameter
+    var noteToDelete = $(this).attr("data-id");
+    // Perform an DELETE request to "/api/notes/" with the id of the note we're
+    // deleting as a parameter
+
+    console.log(noteToDelete)
     $.ajax({
       url: "/api/notes/" + noteToDelete,
       method: "DELETE"

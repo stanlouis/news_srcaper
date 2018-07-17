@@ -193,12 +193,25 @@ app.delete("/api/headlines/:id", function(req, res) {
       { saved: true },
       { new: true }
     );
-    console.log("saved" + req.params.id).catch(function(err) {
+    console.log("deleted" + req.params.id).catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
     });
   });
 });
+
+app.delete("/api/notes/:id", function(req, res) {
+  db.Note.deleteOne({ _id: req.params.id })
+    .then(function(dbArticle) {
+      console.log("deleted" + req.params.id);
+      res.json(dbArticle)
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
 // Start the server
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
