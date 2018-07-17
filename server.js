@@ -37,7 +37,8 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/mongoHeadlines";
+var MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/mongoHeadlines";
 mongoose
   .connect(MONGODB_URI)
   .then(() => console.log("Connected to MongoDB..."))
@@ -99,33 +100,32 @@ app.get("/api/fetch", function(req, res) {
   });
 });
 
-
 // Route for getting all unsaved Articles from the db
 app.get("/api/articles/saved", (req, res) => {
   // Grab every document in the Articles collection
-  db.Article.find({saved:true})
-  .then(function(dbArticle) {
-    // If we were able to successfully find Articles, send them back to the client
-    res.json(dbArticle);
-  })
-  .catch(function(err) {
-    // If an error occurred, send it to the client
-    res.json(err);
-  });
+  db.Article.find({ saved: true })
+    .then(function(dbArticle) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
 
 // Route for getting all unsaved Articles from the db
 app.get("/api/articles/unsaved", (req, res) => {
   // Grab every document in the Articles collection
-  db.Article.find({saved:false})
-  .then(function(dbArticle) {
-    // If we were able to successfully find Articles, send them back to the client
-    res.json(dbArticle);
-  })
-  .catch(function(err) {
-    // If an error occurred, send it to the client
-    res.json(err);
-  });
+  db.Article.find({ saved: false })
+    .then(function(dbArticle) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
 
 app.get("/api/clear", (req, res) => {
@@ -139,25 +139,28 @@ app.get("/api/clear", (req, res) => {
 app.get("/api/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
-  // ..and populate all of the notes associated with it
-      .populate("note")
-      .then(function(dbArticle) {
-    // If we were able to successfully find an Article with the given id, send it back to the client
-    res.json(dbArticle);
-  })
-  .catch(function(err) {
-    // If an error occurred, send it to the client
-    res.json(err);
-  });
+    // ..and populate all of the notes associated with it
+    .populate("note")
+    .then(function(dbArticle) {
+      // If we were able to successfully find an Article with the given id, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
-
 
 app.post("/api/notes/", function(req, res) {
   // Create a new note and pass the req.body to the entry
-  console.log("note", req.body)
+  console.log("note", req.body);
   db.Note.create(req.body)
     .then(function(dbNote) {
-      return db.Article.findOneAndUpdate({ _id: req.body._headlineId }, { note: dbNote._id }, { new: true });
+      return db.Article.findOneAndUpdate(
+        { _id: req.body._headlineId },
+        { $push: { note: dbNote._id } },
+        { new: true }
+      );
     })
     .then(function(dbArticle) {
       res.json(dbArticle);
@@ -167,6 +170,8 @@ app.post("/api/notes/", function(req, res) {
       res.json(err);
     });
 });
+
+
 
 app.put("/api/headlines/:id", function(req, res) {
   // Use the article id to find and update its saved boolean
@@ -181,17 +186,18 @@ app.put("/api/headlines/:id", function(req, res) {
     });
 });
 
-
 app.delete("/api/headlines/:id", function(req, res) {
-  db.Article.deleteOne({_id: req.params.id}).then(function(dbArticle) {
-    db.Article.findOneAndUpdate({_id: req.params.id}, {saved: true},
-        {new: true});
+  db.Article.deleteOne({ _id: req.params.id }).then(function(dbArticle) {
+    db.Article.findOneAndUpdate(
+      { _id: req.params.id },
+      { saved: true },
+      { new: true }
+    );
     console.log("saved" + req.params.id).catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
     });
   });
-
 });
 // Start the server
 app.listen(PORT, function() {
