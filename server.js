@@ -39,9 +39,7 @@ app.set("view engine", "handlebars");
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/mongoHeadlines";
 mongoose
-  .connect(MONGODB_URI, {
-    useNewUrlParser: true
-  })
+  .connect(MONGODB_URI)
   .then(() => console.log("Connected to MongoDB..."))
   .catch(err => console.log("Could not connect to MongoDB", err));
 
